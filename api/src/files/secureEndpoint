@@ -1,33 +1,38 @@
-<?php
+<?
+
 include_once("./api/src/simpleApi.php");
 include_once("./api/src/config.php");
-header('Content-Type: application/json; charset=utf-8');
 
-// array of allowed role to acces this endpoint
-$allowedrole=array(
-    "role1",
-    "role2",
-    "user",
-    "etc"
-);
-
-$jsonFromClient = json_decode(file_get_contents('php://input'),true);
 $sa = new SimpleApi;
 $sa->setHost($defaultDBhost);
 $sa->setUser($defaultDBuser);
 $sa->setPassword($defaultDBpass);
 $sa->setDatabse($defaultDBname);
-//send JSON with token field on it
-$tokenrole = $sa->getRoleFromToken($jsonFromClient["token"]);
+//$jsonFromClient = json_decode(file_get_contents('php://input'),true);
+//get token from header
+$sendertoken = $_SERVER["HTTP_TOKEN"];
+header('Content-Type: application/json; charset=utf-8');
+$IDuser = $sa->getUserFromToken($sendertoken);
+//allowed role
+$allowedrole=array(
+    "siswa","admin"
+);
 
-if (array_search($tokenrole,$allowedrole)){
-    //do what you want here. ex : $sa->queryToJson('select * from table');
+//main :
 
-}
-else{
-    //role is not allowed
-    echo json_encode(array("status"=>"not allowed")) ;
-}
+
+    if ($sa->isThisTokenAllowed($sendertoken,$allowedrole)){
+        //role is allowed
+       
+    
+    }
+    else{
+        //role is not allowed
+        echo json_encode(array("status"=>"not allowed")) ;
+    }    
+
+
+
 
 
 ?>
