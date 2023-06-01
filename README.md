@@ -4,11 +4,11 @@
 Framework ini dirancang untuk kebutuhan dasar pembuatan API, dengan beberapa fitur antara lain :
 
 ## 1. Instalasi mudah
-cukup dengan menyalin kode ke root folder project, kemudian ubah pengaturan koneksi database di "/api/src/config.php" dan ubah kode keamanan token di "api/src/config.php" pada line berikut :
-$GLOBALS["key"] = "kode rahasia anda";
-$GLOBALS["passphrase"] = "kode rahasia boleh dibagi ke pengembang lain";
-$GLOBALS["algorithm"] = "AES-256-CBC";
-
+cukup dengan menyalin kode ke root folder project, kemudian ubah pengaturan koneksi database di "/api/src/config.php" dan ubah kode keamanan token di "api/src/config.php" pada line berikut :  
+$GLOBALS["key"] = "kode rahasia anda";  
+$GLOBALS["passphrase"] = "kode rahasia boleh dibagi ke pengembang lain";  
+$GLOBALS["algorithm"] = "AES-256-CBC";  
+    
 ## 1. Sistem login
 dengan menggunakan metode generateTokenByAuth(params), akan mengembalikan token dalam format JSON, untuk diperhatikan bahwa didalam tabel yang digunakan diperlukan field 'role' untuk dapat menggunakan metode ini
 ## 2. Pengamanan endpoint dengan sistem role
